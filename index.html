@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TechZone - Mobile Accessories Shop</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 1rem 0;
+            position: fixed;
+            width: 100%;
+            top: 0;
+            z-index: 1000;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+
+        nav {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: bold;
+            color: #fff;
+        }
+
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: #ffd700;
+        }
+
+        .mobile-menu {
+            display: none;
+            flex-direction: column;
+            cursor: pointer;
+        }
+
+        .mobile-menu span {
+            width: 25px;
+            height: 3px;
+            background: white;
+            margin: 3px 0;
+            transition: 0.3s;
+        }
+
+        main {
+            margin-top: 70px;
+        }
+
+        .hero {
+            background: linear-gradient(rgba(0,0,0,0.4), rgba(0,0,0,0.4)), url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 1000 600"><rect fill="%23e8f4ff" width="1000" height="600"/><circle fill="%236495ed" cx="200" cy="150" r="80"/><circle fill="%2320b2aa" cx="800" cy="400" r="120"/><rect fill="%23ff6b6b" x="400" y="200" width="200" height="200" rx="20"/></svg>');
+            height: 70vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            background-size: cover;
+            background-position: center;
+        }
+
+        .hero-content h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .hero-content p {
+            font-size: 1.2rem;
+            margin-bottom: 2rem;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.5);
+        }
+
+        .cta-button {
+            display: inline-block;
+            background: #ff6b6b;
+            color: white;
+            padding: 12px 30px;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: bold;
+            transition: all 0.3s;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .cta-button:hover {
+            background: #ff5252;
+            transform: translateY(-2px);
+            box-shadow: 0 5px 15px rgba(255, 107, 107, 0.3);
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 2rem;
+        }
+
+        .section {
+            padding: 4rem 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 3rem;
+            color: #333;
+            position: relative;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 50px;
+            height: 3px;
+            background: #667eea;
+            margin: 10px auto;
+        }
+
+        .products-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .product-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .product-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 20px 40px rgba(0,0,0,0.15);
+        }
+
+        .product-image {
+            height: 200px;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 3rem;
+        }
+
+        .product-info {
+            padding: 1.5rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.3rem;
+            margin-bottom: 0.5rem;
+            color: #333;
+        }
+
+        .product-info p {
+            color: #666;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #ff6b6b;
+        }
+
+        .about-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .about-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: transform 0.3s;
+        }
+
+        .about-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .about-card i {
+            font-size: 3rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        .owners-section {
+            background: linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%);
+        }
+
+        .owners-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .owner-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            transition: all 0.3s;
+        }
+
+        .owner-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.15);
+        }
+
+        .owner-avatar {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 1rem;
+            color: white;
+            font-size: 2rem;
+            font-weight: bold;
+        }
+
+        .owner-name {
+            font-size: 1.2rem;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 0.5rem;
+        }
+
+        .owner-role {
+            color: #666;
+            font-style: italic;
+        }
+
+        .contact-section {
+            background: #333;
+            color: white;
+        }
+
+        .contact-info {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 2rem;
+            margin-top: 2rem;
+        }
+
+        .contact-card {
+            text-align: center;
+            padding: 1.5rem;
+        }
+
+        .contact-card i {
+            font-size: 2rem;
+            color: #667eea;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background: #222;
+            color: white;
+            text-align: center;
+            padding: 2rem 0;
+        }
+
+        @media (max-width: 768px) {
+            .nav-links {
+                display: none;
+            }
+
+            .mobile-menu {
+                display: flex;
+            }
+
+            .hero-content h1 {
+                font-size: 2rem;
+            }
+
+            .hero-content p {
+                font-size: 1rem;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+</head>
+<body>
+    <header>
+        <nav>
+            <div class="logo">📱 TechZone</div>
+            <ul class="nav-links">
+                <li><a href="#home">Home</a></li>
+                <li><a href="#products">Products</a></li>
+                <li><a href="#about">About</a></li>
+                <li><a href="#owners">Our Team</a></li>
+                <li><a href="#contact">Contact</a></li>
+            </ul>
+            <div class="mobile-menu" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </nav>
+    </header>
+
+    <main>
+        <section id="home" class="hero">
+            <div class="hero-content">
+                <h1>Welcome to TechZone</h1>
+                <p>Your one-stop shop for premium mobile accessories</p>
+                <a href="#products" class="cta-button">Shop Now</a>
+            </div>
+        </section>
+
+        <section id="products" class="section">
+            <div class="container">
+                <h2 class="section-title">Our Products</h2>
+                <div class="products-grid">
+                    <div class="product-card" onclick="showProductDetails('Phone Cases')">
+                        <div class="product-image">📱</div>
+                        <div class="product-info">
+                            <h3>Phone Cases</h3>
+                            <p>Premium quality cases for all phone models. Protect your device in style.</p>
+                            <div class="price">₹199 - ₹999</div>
+                        </div>
+                    </div>
+                    <div class="product-card" onclick="showProductDetails('Chargers & Cables')">
+                        <div class="product-image">🔌</div>
+                        <div class="product-info">
+                            <h3>Chargers & Cables</h3>
+                            <p>Fast charging solutions and durable cables for all devices.</p>
+                            <div class="price">₹299 - ₹1499</div>
+                        </div>
+                    </div>
+                    <div class="product-card" onclick="showProductDetails('Earphones & Headsets')">
+                        <div class="product-image">🎧</div>
+                        <div class="product-info">
+                            <h3>Earphones & Headsets</h3>
+                            <p>Crystal clear audio with comfortable wireless and wired options.</p>
+                            <div class="price">₹499 - ₹2999</div>
+                        </div>
+                    </div>
+                    <div class="product-card" onclick="showProductDetails('Screen Protectors')">
+                        <div class="product-image">🛡️</div>
+                        <div class="product-info">
+                            <h3>Screen Protectors</h3>
+                            <p>Tempered glass and film protectors for ultimate screen protection.</p>
+                            <div class="price">₹149 - ₹599</div>
+                        </div>
+                    </div>
+                    <div class="product-card" onclick="showProductDetails('Power Banks')">
+                        <div class="product-image">🔋</div>
+                        <div class="product-info">
+                            <h3>Power Banks</h3>
+                            <p>Portable charging solutions to keep your devices powered all day.</p>
+                            <div class="price">₹999 - ₹3499</div>
+                        </div>
+                    </div>
+                    <div class="product-card" onclick="showProductDetails('Phone Stands & Holders')">
+                        <div class="product-image">📐</div>
+                        <div class="product-info">
+                            <h3>Phone Stands & Holders</h3>
+                            <p>Convenient stands and mounts for hands-free phone usage.</p>
+                            <div class="price">₹199 - ₹799</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="section">
+            <div class="container">
+                <h2 class="section-title">Why Choose TechZone?</h2>
+                <div class="about-grid">
+                    <div class="about-card">
+                        <i class="fas fa-shield-alt"></i>
+                        <h3>Quality Assured</h3>
+                        <p>All our products go through rigorous quality testing to ensure durability and performance.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-shipping-fast"></i>
+                        <h3>Fast Delivery</h3>
+                        <p>Quick and reliable delivery service to get your accessories when you need them.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-money-bill-wave"></i>
+                        <h3>Best Prices</h3>
+                        <p>Competitive pricing with regular discounts and offers on popular items.</p>
+                    </div>
+                    <div class="about-card">
+                        <i class="fas fa-headset"></i>
+                        <h3>24/7 Support</h3>
+                        <p>Our customer support team is always ready to help with any queries or issues.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="owners" class="section owners-section">
+            <div class="container">
+                <h2 class="section-title">Meet Our Team</h2>
+                <div class="owners-grid">
+                    <div class="owner-card">
+                        <div class="owner-avatar">A</div>
+                        <div class="owner-name">Abhishek</div>
+                        <div class="owner-role">Co-Founder & CEO</div>
+                    </div>
+                    <div class="owner-card">
+                        <div class="owner-avatar">S</div>
+                        <div class="owner-name">Sumit</div>
+                        <div class="owner-role">Co-Founder & CTO</div>
+                    </div>
+                    <div class="owner-card">
+                        <div class="owner-avatar">A</div>
+                        <div class="owner-name">Advit</div>
+                        <div class="owner-role">Head of Operations</div>
+                    </div>
+                    <div class="owner-card">
+                        <div class="owner-avatar">A</div>
+                        <div class="owner-name">Aniket</div>
+                        <div class="owner-role">Marketing Director</div>
+                    </div>
+                    <div class="owner-card">
+                        <div class="owner-avatar">S</div>
+                        <div class="owner-name">Sudha</div>
+                        <div class="owner-role">Customer Relations</div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section id="contact" class="section contact-section">
+            <div class="container">
+                <h2 class="section-title">Contact Us</h2>
+                <div class="contact-info">
+                    <div class="contact-card">
+                        <i class="fas fa-map-marker-alt"></i>
+                        <h3>Visit Our Store</h3>
+                        <p>123 Tech Street<br>Electronics Market<br>Pune, Maharashtra 411001</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-phone"></i>
+                        <h3>Call Us</h3>
+                        <p>+91 98765 43210<br>+91 87654 32109</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-envelope"></i>
+                        <h3>Email Us</h3>
+                        <p>info@techzone.com<br>support@techzone.com</p>
+                    </div>
+                    <div class="contact-card">
+                        <i class="fas fa-clock"></i>
+                        <h3>Working Hours</h3>
+                        <p>Mon - Sat: 10:00 AM - 9:00 PM<br>Sun: 11:00 AM - 8:00 PM</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="container">
+            <p>&copy; 2024 TechZone Mobile Accessories. All rights reserved. | College Project by Team TechZone</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleMenu() {
+            const navLinks = document.querySelector('.nav-links');
+            navLinks.style.display = navLinks.style.display === 'flex' ? 'none' : 'flex';
+        }
+
+        function showProductDetails(productName) {
+            alert(`You clicked on: ${productName}\n\nThis would normally open a detailed product page with:\n• Product specifications\n• Multiple images\n• Customer reviews\n• Add to cart functionality\n\nFor the college project, this is a demonstration of interactive features!`);
+        }
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                document.querySelector(this.getAttribute('href')).scrollIntoView({
+                    behavior: 'smooth'
+                });
+            });
+        });
+
+        // Header background change on scroll
+        window.addEventListener('scroll', function() {
+            const header = document.querySelector('header');
+            if (window.scrollY > 100) {
+                header.style.background = 'rgba(102, 126, 234, 0.95)';
+            } else {
+                header.style.background = 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+            }
+        });
+
+        // Animation on scroll
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.product-card, .about-card, .owner-card');
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < window.innerHeight - elementVisible) {
+                    element.style.opacity = '1';
+                    element.style.transform = 'translateY(0)';
+                }
+            });
+        }
+
+        // Initial setup for animation
+        document.querySelectorAll('.product-card, .about-card, .owner-card').forEach(element => {
+            element.style.opacity = '0';
+            element.style.transform = 'translateY(20px)';
+            element.style.transition = 'all 0.6s ease';
+        });
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Welcome message
+        window.addEventListener('load', function() {
+            setTimeout(() => {
+                alert('🎉 Welcome to TechZone!\n\nThis is a college project website for Mobile Accessories Shop.\n\nCreated by: Abhishek, Sumit, Advit, Aniket & Sudha\n\nFeatures:\n✅ Responsive Design\n✅ Interactive Elements\n✅ Modern UI/UX\n✅ Product Showcase\n✅ Team Section\n\nEnjoy exploring!');
+            }, 1000);
+        });
+    </script>
+</body>
+</html>
